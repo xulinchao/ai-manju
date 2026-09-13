@@ -1,0 +1,32 @@
+{
+  "_schema": "style-pack v1（字段说明见 _engine/styles.py）",
+  "id": "cinematic_donghua",
+  "name": "国漫电影感",
+  "form": "国漫电影感",
+  "default_ratio": "16:9",
+  "describe": "靠一束主光与大面积暗部，让每镜都像电影海报——观众先看到光在哪，再看画面里是谁。",
+
+  "positive": "国产动画电影风格，干净线稿加赛璐璐上色；每镜有单一明确主光源，光线方向统一，受光面亮、背光面压暗；暗部占画面一半以上，暗部为冷色而非纯黑；边缘光为冷青色，环境光为暖橙色；面部高光只有一处，位置在鼻梁与颧骨；背景简化至三到四个色层，远景用色块而非细节；整体明度偏低，靠局部高光提亮；材质的金属与布料用高光边区分",
+
+  "negative": "photorealistic, 3d render, plastic skin, oversaturated, muddy color, flat lighting, uniform brightness, no contrast, pastel, watercolor texture, paper grain",
+
+  "params": {},
+
+  "motion": {
+    "policy": "beat_focused",
+    "allow": ["转折镜给全动作", "过渡镜用推拉与位移带过", "发丝与衣摆"],
+    "forbid": ["平均分配运动量", "所有层同时动"]
+  },
+
+  "continuity": {
+    "must": ["主光方向", "暗部色温", "线稿密度", "人物衣色"],
+    "skip": ["背景色块的确切形状"]
+  },
+
+  "lexicon": {
+    "prefer": ["主光", "压暗", "边缘光", "赛璐璐", "高光边"],
+    "forbid": ["四溅", "光斑", "平均亮度", "纸纹"]
+  },
+
+  "notes": "短视频平台最吃这一套——高对比，一眼见主体，缩略图上就立得住。代价是水墨的雅致全部失去，气质会从「志怪」变成「热血番」。若走这条，建议 motion 用 beat_focused（转折镜才给全动作），否则成本与翻车率都上升。"
+}

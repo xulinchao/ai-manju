@@ -1,0 +1,25 @@
+# ===== 第三方参考库（AGPLv3，独立仓库内容，不入本项目版本控制）=====
+OpenMontage-reference/
+
+# ===== 备份与临时产物 =====
+_backups/
+*.tmp
+*.bak
+*~
+
+# ===== Python =====
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ===== Node =====
+node_modules/
+
+# ===== 系统与编辑器 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== ComfyUI 运行时临时文件 =====
+*.prompt_id.lock

@@ -1,0 +1,140 @@
+{
+  "9": {
+    "inputs": {
+      "filename_prefix": "tianshi-shuigui/CHAR-QI/v001",
+      "images": [
+        "57:8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "57:30": {
+    "inputs": {
+      "clip_name": "qwen_3_4b.safetensors",
+      "type": "lumina2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "57:29": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "57:33": {
+    "inputs": {
+      "conditioning": [
+        "57:27",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "条件零化"
+    }
+  },
+  "57:8": {
+    "inputs": {
+      "samples": [
+        "57:3",
+        0
+      ],
+      "vae": [
+        "57:29",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "57:28": {
+    "inputs": {
+      "unet_name": "z_image_turbo_bf16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "57:27": {
+    "inputs": {
+      "text": "新中式动画电影画面，二维手绘上色带电影光感。每镜有单一明确主光源，光线方向统一，受光面亮、背光面沉入暗部，暗部为黛青色而非纯黑；人物与建筑以稳定墨线勾勒，内部淡彩水墨铺染，绢面质感细腻，纸纹只做底、不遮脸部和手部动作。整体色调取传统色：月白、黛青、赭石、墨黑，夜间场景点缀暖黄灯光，暖黄只出现在灯焰与受光面；留白与暗部承担画面呼吸，远景用淡墨色块分层而非细节堆叠；边缘光为冷青色。人物比例自然，五官简洁可辨，服装为古代中式布衣，家具陈设带传统民居的生活气息。画面有电影构图，主体清楚，明暗交界清晰，细节清楚可辨。笔触方向稳定一致\n色板：月白、黛青、赭石、墨黑；暖黄只出现在灯焰与受光面\n光线：每镜单一明确主光源；白天窗光，夜晚油灯\n中年妇人，面相温和，圆发髻插素银簪，藕色右衽素面袄裙，深色裙腰，绣鞋，自然比例。全身正面站立，双手自然垂下，简洁浅色背景，五官清楚。",
+      "clip": [
+        "57:30",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码"
+    }
+  },
+  "57:13": {
+    "inputs": {
+      "width": 1280,
+      "height": 720,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "空Latent图像（SD3）"
+    }
+  },
+  "57:11": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "57:28",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "采样算法（AuraFlow）"
+    }
+  },
+  "57:3": {
+    "inputs": {
+      "seed": 278070891630702,
+      "steps": 8,
+      "cfg": 1,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "57:11",
+        0
+      ],
+      "positive": [
+        "57:27",
+        0
+      ],
+      "negative": [
+        "57:33",
+        0
+      ],
+      "latent_image": [
+        "57:13",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  }
+}

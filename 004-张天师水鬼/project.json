@@ -1,0 +1,28 @@
+{
+  "image_pipeline_version": 2,
+  "candidate_limit": 5,
+  "art_direction": {
+    "色板": "月白、黛青、赭石、墨黑；暖黄只出现在灯焰与受光面",
+    "光线": "每镜单一明确主光源；白天窗光，夜晚油灯"
+  },
+  "title": "张天师水鬼",
+  "subtitle": "天师的礼物",
+  "source": "黄华《民间故事新集》，上海正气书局1948年5月",
+  "slug": "tianshi-shuigui",
+  "ratio": "16:9",
+  "width": 1280,
+  "height": 720,
+  "form": "新中式动画电影",
+  "style_id": "neo_chinese_cinematic",
+  "target_seconds": 55,
+  "megapixels": 0.4,
+  "csv": "shots.csv",
+  "random_seed": true,
+  "comfy_url": "http://127.0.0.1:8188",
+  "workflows": {
+    "t2i": "t2i_z_image_turbo.json",
+    "edit": "edit_qwen_image_edit_2509.json",
+    "i2v": "minimax_h3_i2v.json",
+    "r2v": "minimax_h3_r2v.json"
+  }
+}

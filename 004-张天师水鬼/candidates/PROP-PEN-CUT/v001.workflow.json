@@ -1,0 +1,31 @@
+{
+  "source": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "c1a708a5ed0e089e.png"
+    }
+  },
+  "crop": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "source",
+        0
+      ],
+      "x": 100,
+      "y": 0,
+      "width": 790,
+      "height": 720
+    }
+  },
+  "save": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "crop",
+        0
+      ],
+      "filename_prefix": "tianshi-shuigui/PROP-PEN-CUT/v001"
+    }
+  }
+}

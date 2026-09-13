@@ -1,0 +1,32 @@
+{
+  "_schema": "style-pack v1",
+  "id": "live_action",
+  "name": "实拍",
+  "form": "实拍",
+  "default_ratio": "16:9",
+  "describe": "真实空间、真实光源、可表演动作。叙事职责是用物理可信性建立压迫感，代价是逐镜一致性最难维持。",
+
+  "positive": "",
+
+  "negative": "cartoon, anime, illustration, painting, 3d render, cgi, plastic skin, oversaturated",
+
+  "params": {},
+
+  "motion": {
+    "policy": "full",
+    "allow": ["完整动作"],
+    "forbid": ["无接触点的漂浮", "瞬间移动", "橡皮质感 CG 动作"]
+  },
+
+  "continuity": {
+    "must": ["造型层次与整洁度", "湿污伤", "手中物", "光源时段与方向"],
+    "skip": ["不出画的内层", "无从比较的陈设"]
+  },
+
+  "lexicon": {
+    "prefer": ["定向光", "柔和的 2:1 光比", "具体材质表面处理"],
+    "forbid": ["cg感", "渲染感", "插画感"]
+  },
+
+  "notes": "positive 故意留空——写实不是一种能靠风格块叠加出来的东西，靠每镜提示词里的光源与材质锚点实现。这是本地管线上最难跑的形态：默认全动作，插值段最容易丢接触点与重量感。写法是给限制不给动作清单，并把接触点写进首帧或尾帧。"
+}

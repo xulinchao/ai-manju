@@ -1,0 +1,32 @@
+{
+  "_schema": "style-pack v1（字段说明见 _engine/styles.py）",
+  "id": "qinglv_landscape",
+  "name": "青绿山水",
+  "form": "青绿重彩",
+  "default_ratio": "16:9",
+  "describe": "靠石青石绿的色阶高低与泥金勾线，让山水显出贵重感——观众读到的是盛世气象，不是荒野。",
+
+  "positive": "中国青绿山水，绢本设色；山石以石青石绿分染，色层由深到浅逐层罩染，每层色阶可辨；山脊与楼阁轮廓用泥金勾线，金线粗细一致；朱砂只用于人物衣饰与极小的点缀，合计不超过画面百分之五；阴影不用黑色，用花青加深代替；云与水以留白与淡石绿相接，不画波纹细节；整体明快，明度偏高；笔触为工笔细线，方向稳定一致",
+
+  "negative": "photorealistic, 3d render, plastic, glossy, neon, muddy color, dark overall, western oil painting, heavy shadow, dirty palette, thick impasto",
+
+  "params": {},
+
+  "motion": {
+    "policy": "minimal",
+    "allow": ["云气缓慢移动", "水面微光", "衣摆与发丝位移"],
+    "forbid": ["整幅笔触抖动", "所有元素同时动", "快速运镜"]
+  },
+
+  "continuity": {
+    "must": ["色层顺序", "金线位置与粗细", "山势走向", "人物衣色"],
+    "skip": ["云的确切形状", "远景树木数量"]
+  },
+
+  "lexicon": {
+    "prefer": ["石青", "石绿", "泥金", "罩染", "绢本", "花青"],
+    "forbid": ["四溅", "光斑", "焦墨", "纯黑", "高饱和荧光色"]
+  },
+
+  "notes": "与 ink_wash 恰成反向：ink_wash 靠墨的浓淡承担层级，本包靠色的高低承担层级。适用于需要「贵重 / 明快 / 盛世」语气的题材（仙山、宫苑、节庆）。用于志怪题材时要先想清楚——青绿的明快会消解阴森感，鬼怪场面可能变得像壁画。"
+}

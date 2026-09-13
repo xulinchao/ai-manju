@@ -1,0 +1,34 @@
+{
+  "id": "woodcut_clean",
+  "name": "木刻淡彩绘本",
+  "form": "二维绘本",
+  "default_ratio": "16:9",
+  "describe": "清楚的轮廓、简洁造型与透明淡彩；具体角色和场景另行定义。",
+  "positive": "二维手绘绘本，木刻感轮廓概括形体，淡彩水墨填充色面，纸纹轻薄，人物比例自然，五官简洁可辨，衣服轮廓清楚，色块边缘稳定，主体与背景层次清楚。",
+  "negative": "photorealistic, 3d render, plastic skin, heavy grain",
+  "params": {},
+  "motion": {
+    "policy": "minimal",
+    "allow": [
+      "单一主要动作"
+    ],
+    "forbid": []
+  },
+  "continuity": {
+    "must": [
+      "线条语言",
+      "人物比例"
+    ],
+    "skip": [
+      "细微纸纹"
+    ]
+  },
+  "lexicon": {
+    "prefer": [
+      "淡彩",
+      "细线"
+    ],
+    "forbid": []
+  },
+  "notes": "通用预设，不包含任何角色身份、场景地点或剧情状态。"
+}

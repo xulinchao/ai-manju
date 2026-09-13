@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="AI视频制作中的画风、影视风格、参考资产和镜头提示词实用手册，含张天师收服水鬼案例。"><title>AI 视频画风与影视风格实用手册</title><style>
+:root{--paper:#fbf9f4;--ink:#24342f;--muted:#65716a;--line:#dce2d9;--accent:#315d4b;--soft:#eef2ea;--rust:#a15b37}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.85 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.shell{max-width:1420px;margin:auto;display:grid;grid-template-columns:270px minmax(0,1fr);gap:54px;padding:42px 48px 88px}aside{position:sticky;top:30px;height:calc(100vh - 60px);overflow:auto;padding-right:20px}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--rust);font-weight:750}.brand{font-size:23px;font-weight:750;line-height:1.5;margin:10px 0 24px}.sub{color:var(--muted);font-size:13px;margin-bottom:26px}nav{display:grid;gap:6px}nav a{text-decoration:none;color:var(--muted);font-size:14px;padding:7px 10px;border-left:2px solid transparent;line-height:1.5}nav a:hover,nav a.active{border-color:var(--accent);color:var(--accent);background:var(--soft)}main{min-width:0;max-width:1000px}.tools{display:flex;gap:12px;align-items:center;margin-bottom:24px}.tools a,.tools button{font:inherit;font-size:13px;color:var(--accent);background:transparent;border:1px solid var(--line);padding:6px 13px;border-radius:6px;text-decoration:none;cursor:pointer}h1{font-size:clamp(29px,3.5vw,44px);line-height:1.3;letter-spacing:-1px;margin:0 0 27px}h2{font-size:26px;line-height:1.5;margin:60px 0 24px;padding-top:20px;border-top:1px solid var(--line)}h3{font-size:19px;margin:32px 0 14px}p{margin:14px 0}strong{color:#254d3c}blockquote{margin:22px 0;padding:12px 22px;border-left:4px solid #92aa8c;background:var(--soft);color:#47584c;font-size:15px}blockquote p{margin:5px 0}.table-wrap{overflow:auto;margin:22px 0;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.7}th,td{text-align:left;vertical-align:top;padding:13px 16px;border-bottom:1px solid var(--line);min-width:115px}th{background:#e8eee3;color:#31513e;font-weight:700}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#f3f5ef}td:first-child{font-weight:550}.code-wrap{position:relative;margin:22px 0;background:#edf1eb;border:1px solid var(--line);border-radius:8px}pre{margin:0;padding:52px 22px 22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.95 ui-monospace,Consolas,"Microsoft YaHei",monospace;color:#294638}.copy{position:absolute;top:9px;right:10px;border:1px solid #c6d2c3;border-radius:5px;background:#fbfdf9;color:#315d4b;padding:4px 10px;cursor:pointer;font-size:12px}li{margin:9px 0}footer{margin-top:50px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12px}a:focus-visible,button:focus-visible{outline:3px solid #a15b37;outline-offset:3px}
+@media(max-width:950px){.shell{grid-template-columns:1fr;padding:26px 22px;gap:30px}aside{position:static;height:auto;padding:0;border-bottom:1px solid var(--line);padding-bottom:22px}.brand{margin-bottom:7px}.sub{margin-bottom:14px}nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}nav a{font-size:12px}.tools{margin-bottom:20px}h2{font-size:23px;margin-top:42px}th,td{padding:10px 12px}}
+@media print{body{background:white;font-size:10pt;color:#111}.shell{display:block;padding:0;max-width:none}aside,.tools,.copy{display:none}main{max-width:none}h1{font-size:25pt}h2{font-size:17pt;margin-top:25px;break-after:avoid}h3{break-after:avoid}table{font-size:9pt}.table-wrap{overflow:visible}tr{break-inside:avoid}pre{padding:12px;font-size:9pt}.code-wrap{break-inside:avoid}a{color:inherit;text-decoration:none}footer{display:none}}
+</style></head>
+<body><div class="shell"><aside><div class="eyebrow">AI VIDEO · FIELD GUIDE</div><div class="brand">从画面到镜头</div><div class="sub">选风格 · 定资产 · 写镜头 · 查一致性<br>适用于三种 AI 视频生成路径</div><nav aria-label="章节目录"><a href="#section-1">1. 先把三个概念分清</a><a href="#section-3">2. 统一风格的四层结构</a><a href="#section-8">3. 画风选项库：按维度选择</a><a href="#section-13">4. 影视风格选项库：把时间与声音写出来</a><a href="#section-17">5. 怎样选出一套可执行风格</a><a href="#section-19">6. 三种生成路径，分别怎样写</a><a href="#section-24">7. 可直接复用的模板</a><a href="#section-27">8. 实例：《张天师收服水鬼》</a><a href="#section-33">9. 一致性检查与常见问题</a><a href="#section-34">10. 对原总结的评估与使用边界</a></nav></aside><main><div class="tools"><a href="AI视频画风与影视风格实用手册.md" download>下载 Markdown</a><button id="print" type="button">打印 / 保存 PDF</button></div><article><h1>AI 视频画风与影视风格实用手册</h1>
+<blockquote>
+<p>适用场景：先生成图片再做视频、首尾帧视频、直接文生视频。本文是一套创作与生产组织方法，不是唯一的学术分类，也不依赖某个生成模型。</p>
+</blockquote>
+<p><strong>核心原则：一套全片视觉规则，多份镜头画面与动态描述。图片与视频分工描述，共用视觉设定。</strong></p>
+<h2 id="section-1">1. 先把三个概念分清</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>主要回答</th>
+<th>包含什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画风／视觉风格</td>
+<td>画面呈现出什么外观？</td>
+<td>造型、线条、笔触、材质、色彩、明暗、空间表现</td>
+</tr>
+<tr>
+<td>影视风格</td>
+<td>作品怎样通过影像与声音组织观看体验？</td>
+<td>美术、摄影、场面调度、表演、时间、剪辑、叙事、声音</td>
+</tr>
+<tr>
+<td>生成方式</td>
+<td>用什么输入与工具生产镜头？</td>
+<td>文生图、图生视频、首尾帧视频、文生视频、后期合成</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>画风与影视风格有重叠，不是完全独立的两条轴。</strong> 色彩、光线、构图和材质同时作用于静态画面与动态影像。影视风格的范围更广，还包含这些视觉特征如何随时间变化、如何与叙事和声音共同起作用。</p>
+<p>“画风管静态，影视风格管动态”适合作为入门记忆，但不宜当作严格定义。一个静帧也能体现电影的美术与摄影风格，只是无法独自表达完整的剪辑、动作和声音。</p>
+<p>两者可以组合，也可以有计划地混合。关键是明确主次、作用范围和一致性规则。例如“木刻感轮廓＋淡彩水墨上色”有明确分工；“纯平面水墨＋照片级皮肤毛孔＋厚重三维塑料材质”若同时作用于同一个人物表面，就容易产生冲突。</p>
+<h3 id="section-2">题材、类型、情绪和风格也要分开</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>例子</th>
+<th>创作作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>题材</td>
+<td>张天师役鬼、校园生活、太空探索</td>
+<td>确定讲什么</td>
+</tr>
+<tr>
+<td>类型</td>
+<td>民间志怪、悬疑、喜剧、爱情</td>
+<td>确定故事模式与观看期待</td>
+</tr>
+<tr>
+<td>情绪</td>
+<td>温暖、不安、孤独、庄重</td>
+<td>确定希望观众感受到什么</td>
+</tr>
+<tr>
+<td>视觉风格</td>
+<td>淡彩水墨、扁平色块、写实三维</td>
+<td>确定画面外观</td>
+</tr>
+<tr>
+<td>视听手法</td>
+<td>固定机位、低声旁白、反应镜头、环境声</td>
+<td>把故事与情绪具体呈现出来</td>
+</tr>
+</tbody>
+</table></div>
+<p>“悬疑”不会自动决定颜色，“水彩”也不会自动意味着温柔。相同画风可以通过不同动作、剪辑和声音呈现不同情绪。</p>
+<h2 id="section-3">2. 统一风格的四层结构</h2>
+<h3 id="section-4">第一层：全片视觉规则</h3>
+<p>规定全片共同的制作外观、造型、线条、材质、色板和光影原则。规则应具体到能检查画面，而不只是一串风格名称。</p>
+<h3 id="section-5">第二层：角色与场景资产</h3>
+<p>保存角色参考图、服装、配饰、比例，记录房间布局、主要道具及相互位置。风格一致不等于人物一致；同样的水彩提示词，仍可能生成不同的脸。</p>
+<h3 id="section-6">第三层：镜头画面与动态</h3>
+<p>画面描述负责机位、景别、构图和起始状态；动态描述负责人物动作、摄影机运动、先后关系和结束状态。需要尾帧时，再明确终点画面。</p>
+<h3 id="section-7">第四层：全片叙事、剪辑与声音</h3>
+<p>规定信息何时揭示、镜头如何连接、旁白怎样配合画面、音乐与环境声如何使用。这些内容多数应保留在分镜表或后期说明中，不需要全部塞进单镜头生成提示词。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>设定层</th>
+<th>主要产物</th>
+<th>更新规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全片视觉</td>
+<td>风格卡＋代表性样图</td>
+<td>定稿后稳定复用；变化时明确适用段落</td>
+</tr>
+<tr>
+<td>资产</td>
+<td>角色图、场景图、道具记录</td>
+<td>同一身份保持关键特征，换装等变化需记录</td>
+</tr>
+<tr>
+<td>镜头</td>
+<td>首帧、可选尾帧、动作与运镜说明</td>
+<td>每个镜头分别编写</td>
+</tr>
+<tr>
+<td>全片视听</td>
+<td>分镜顺序、旁白、剪辑点、声音表</td>
+<td>随故事节奏调整</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>统一的是规则，不是让所有镜头相同。</strong> 白天与夜晚可以不同，远景与特写可以不同；它们应延续相同的美术语言与合理的时空关系。</p>
+<h2 id="section-8">3. 画风选项库：按维度选择</h2>
+<p>以下按实用检索整理，类别会有交集。不要把媒介、历史流派、用途和题材当成互斥选项。</p>
+<h3 id="section-9">3.1 媒介与技法外观</h3>
+<p>数字生成可以模拟这些外观，不代表实际使用了对应物理媒介。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>可见特征</th>
+<th>描述时补充什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>铅笔素描</td>
+<td>灰度、排线、擦抹</td>
+<td>线条粗细、明暗密度、纸纹</td>
+</tr>
+<tr>
+<td>炭笔</td>
+<td>深黑、粗犷笔触、柔硬边缘</td>
+<td>黑白比例、擦抹程度</td>
+</tr>
+<tr>
+<td>钢笔／线描</td>
+<td>轮廓和排线明确</td>
+<td>是否填色、线密度、线宽</td>
+</tr>
+<tr>
+<td>彩铅</td>
+<td>细腻叠色、颗粒</td>
+<td>色彩浓淡、笔触可见程度</td>
+</tr>
+<tr>
+<td>水彩</td>
+<td>透明色层、晕染、水痕</td>
+<td>边缘软硬、留白、晕染范围</td>
+</tr>
+<tr>
+<td>水粉</td>
+<td>不透明色块、覆盖性</td>
+<td>平涂或笔触、色块形状</td>
+</tr>
+<tr>
+<td>油画</td>
+<td>丰富色层、厚涂或罩染</td>
+<td>笔触尺度、厚度、写实程度</td>
+</tr>
+<tr>
+<td>丙烯</td>
+<td>鲜明色彩、可平涂可厚涂</td>
+<td>表面纹理、轮廓与覆盖方式</td>
+</tr>
+<tr>
+<td>粉彩／油画棒</td>
+<td>颗粒、摩擦、涂抹</td>
+<td>颗粒粗细、叠色与边缘</td>
+</tr>
+<tr>
+<td>马克笔</td>
+<td>方向性笔触、清楚色面</td>
+<td>是否保留线稿、色阶数量</td>
+</tr>
+<tr>
+<td>水墨写意</td>
+<td>墨色干湿浓淡、笔势、留白</td>
+<td>墨块分布、人物细节程度</td>
+</tr>
+<tr>
+<td>工笔</td>
+<td>细勾线、层层设色</td>
+<td>线条精细度、色彩与背景密度</td>
+</tr>
+<tr>
+<td>木刻／版画感</td>
+<td>刻痕、强轮廓、套色</td>
+<td>刻线方向、用色数量、错版程度</td>
+</tr>
+<tr>
+<td>拼贴</td>
+<td>不同材料的边缘与叠层</td>
+<td>纸张或照片来源类型、层次</td>
+</tr>
+<tr>
+<td>喷绘／气笔</td>
+<td>平滑渐变、柔边缘</td>
+<td>亮面程度、色调与轮廓</td>
+</tr>
+<tr>
+<td>数字厚涂</td>
+<td>以笔刷塑造体积和光影</td>
+<td>笔触显隐、材质、细节密度</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-10">3.2 造型与设计语言</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>可见特征</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写实造型</td>
+<td>接近自然比例和结构</td>
+<td>写实造型也可以用水彩表现</td>
+</tr>
+<tr>
+<td>卡通／Q版</td>
+<td>简化形体、夸张比例</td>
+<td>固定头身比与五官规则</td>
+</tr>
+<tr>
+<td>日式漫画语言</td>
+<td>漫画化造型，可使用网点、速度线</td>
+<td>范围很广，需明确具体特征</td>
+</tr>
+<tr>
+<td>美式超级英雄漫画</td>
+<td>强动作、夸张体块、戏剧光影</td>
+<td>不代表所有美式漫画</td>
+</tr>
+<tr>
+<td>清线漫画</td>
+<td>轮廓清楚、形状易读</td>
+<td>明确背景与人物的细节关系</td>
+</tr>
+<tr>
+<td>扁平插画</td>
+<td>大色块、弱体积</td>
+<td>约定是否允许渐变和投影</td>
+</tr>
+<tr>
+<td>几何插画</td>
+<td>基础几何形概括对象</td>
+<td>固定形状和比例语言</td>
+</tr>
+<tr>
+<td>等距插画</td>
+<td>平行投影式空间表达</td>
+<td>运镜时注意投影规则是否改变</td>
+</tr>
+<tr>
+<td>涂鸦／童稚</td>
+<td>不规则线条、稚拙比例</td>
+<td>有意简化仍需要一致性</td>
+</tr>
+<tr>
+<td>像素画</td>
+<td>像素网格、有限色板</td>
+<td>固定像素尺度，注意视频中网格漂移</td>
+</tr>
+<tr>
+<td>低多边形</td>
+<td>可见几何切面</td>
+<td>固定面数观感与材质</td>
+</tr>
+<tr>
+<td>黏土外观</td>
+<td>圆润、手工压痕、可触摸感</td>
+<td>黏土外观不等于实际定格制作</td>
+</tr>
+<tr>
+<td>剪纸／纸雕</td>
+<td>裁切轮廓、纸层与投影</td>
+<td>固定层次和纸张厚度观感</td>
+</tr>
+<tr>
+<td>复古印刷</td>
+<td>网点、套色、油墨纹理</td>
+<td>纹理过强会损失动作细节</td>
+</tr>
+</tbody>
+</table></div>
+<p>“绘本”“编辑插画”“科学插图”主要指用途或创作领域，内部可有多种画风；“矢量”主要指图形表示方式，使用时仍要补充具体外观。</p>
+<h3 id="section-11">3.3 美术传统与审美参照</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>参照</th>
+<th>可借用的视觉特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>古典主义</td>
+<td>平衡、秩序、理想化比例</td>
+</tr>
+<tr>
+<td>巴洛克</td>
+<td>戏剧光影、动态构图</td>
+</tr>
+<tr>
+<td>洛可可</td>
+<td>轻盈色调、细腻装饰</td>
+</tr>
+<tr>
+<td>浪漫主义</td>
+<td>强情感、自然力量、宏大尺度</td>
+</tr>
+<tr>
+<td>印象主义</td>
+<td>光色变化、可见笔触</td>
+</tr>
+<tr>
+<td>后印象主义</td>
+<td>多种个人化探索；应进一步指定结构或色彩特点</td>
+</tr>
+<tr>
+<td>野兽派</td>
+<td>高饱和、非自然色彩</td>
+</tr>
+<tr>
+<td>表现主义</td>
+<td>变形、强色彩、心理化空间</td>
+</tr>
+<tr>
+<td>立体主义</td>
+<td>分解形体、多视角重组</td>
+</tr>
+<tr>
+<td>超现实主义</td>
+<td>梦境逻辑、不可能的组合</td>
+</tr>
+<tr>
+<td>抽象艺术</td>
+<td>色彩、线条和形状成为主要对象</td>
+</tr>
+<tr>
+<td>极简主义</td>
+<td>减少元素、强调比例与空间</td>
+</tr>
+<tr>
+<td>波普艺术</td>
+<td>大众符号、复制、鲜明色块</td>
+</tr>
+<tr>
+<td>新艺术</td>
+<td>植物曲线、流动轮廓</td>
+</tr>
+<tr>
+<td>装饰艺术</td>
+<td>几何、对称、放射与装饰秩序</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些是便于创作的特征摘要，不是完整的艺术史定义。流派名称最好作为参考方向，再转成可见描述。</p>
+<h3 id="section-12">3.4 世界观与视觉母题</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>常见视觉线索</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>赛博朋克</td>
+<td>高技术、社会失序、密集城市、身体改造</td>
+</tr>
+<tr>
+<td>蒸汽朋克</td>
+<td>蒸汽机械、黄铜、历史服饰改造</td>
+</tr>
+<tr>
+<td>柴油朋克</td>
+<td>工业机械、战争年代意象、厚重金属</td>
+</tr>
+<tr>
+<td>太阳朋克</td>
+<td>生态城市、植物与技术共存</td>
+</tr>
+<tr>
+<td>废土／末日</td>
+<td>破败设施、资源匮乏、生存装备</td>
+</tr>
+<tr>
+<td>哥特</td>
+<td>尖拱、幽暗空间、死亡与浪漫意象</td>
+</tr>
+<tr>
+<td>东方奇幻</td>
+<td>神话、传统建筑服饰、想象生物；应明确文化和时代参照</td>
+</tr>
+<tr>
+<td>复古未来主义</td>
+<td>过去时代对未来的想象</td>
+</tr>
+<tr>
+<td>Y2K</td>
+<td>千禧年前后的数码、透明塑料和亮面视觉</td>
+</tr>
+<tr>
+<td>蒸汽波／合成器复古</td>
+<td>怀旧数码或霓虹电子视觉；两者并非同一风格</td>
+</tr>
+<tr>
+<td>梦核／怪核</td>
+<td>熟悉空间中的异常、梦境或不安</td>
+</tr>
+</tbody>
+</table></div>
+<p>母题需要具体设计支撑。“古风”不等于明确时代，“赛博朋克”也不等于只加霓虹灯。</p>
+<h2 id="section-13">4. 影视风格选项库：把时间与声音写出来</h2>
+<h3 id="section-14">4.1 外观、制作方式与叙事载体</h3>
+<p>真人影像、二维动画、三维动画、定格动画、转描和混合媒介可以提供不同的视觉与运动参照。动态图形以文字与图形运动为主；屏幕叙事以界面为叙事载体；档案拼贴以已有材料组织内容。它们不属于完全相同的分类层级。</p>
+<p>对于 AI 生成，应区分“看起来像定格动画”与“实际逐格拍摄”。提示词可以要求定格外观和节奏，但不能据此声称采用了真实定格工艺。</p>
+<h3 id="section-15">4.2 主要视听维度</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>常用选项</th>
+<th>应写成什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>景别</td>
+<td>远景、全景、中景、近景、特写</td>
+<td>主体与环境各占多少，强调哪部分</td>
+</tr>
+<tr>
+<td>角度与构图</td>
+<td>平视、俯视、仰视、对称、偏置</td>
+<td>摄影机位置、人物朝向、留白方向</td>
+</tr>
+<tr>
+<td>摄影机运动</td>
+<td>固定、推近、拉远、横移、摇摄、跟随、手持</td>
+<td>谁在移动、向哪里、速度怎样</td>
+</tr>
+<tr>
+<td>空间与焦点</td>
+<td>深焦、浅景深、焦点转移</td>
+<td>哪个对象清楚，焦点是否变化</td>
+</tr>
+<tr>
+<td>光线</td>
+<td>自然光逻辑、高调、低调、柔光、硬光、明暗对照</td>
+<td>光源位置、阴影、亮暗比例</td>
+</tr>
+<tr>
+<td>色彩与质感</td>
+<td>低饱和、高饱和、黑白、胶片、数码、家庭录像</td>
+<td>色板、颗粒强度、清晰度</td>
+</tr>
+<tr>
+<td>表演与动作</td>
+<td>自然、克制、冷面、夸张、舞台化</td>
+<td>视线、停顿、手势、身体变化</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>实时、慢动作、延时、较长停留</td>
+<td>动作速度与镜头持续方式</td>
+</tr>
+<tr>
+<td>剪辑</td>
+<td>连续、跳切、平行、匹配、联想、省略、分屏</td>
+<td>哪里切、切到什么、建立何种联系</td>
+</tr>
+<tr>
+<td>叙事</td>
+<td>因果推进、生活流、诗意、非线性、群像、寓言</td>
+<td>观众何时获得哪条信息</td>
+</tr>
+<tr>
+<td>声音</td>
+<td>环境声、配乐、旁白、主观声、声画对位</td>
+<td>声音来源、进入时机、主次与停顿</td>
+</tr>
+</tbody>
+</table></div>
+<p>“长镜头”指持续较长的连续镜头，不等于固定机位；“慢动作”改变动作呈现速度，不等于剪辑缓慢；“浅景深”也不是电影感的必备条件。</p>
+<h3 id="section-16">4.3 综合标签怎样落地</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>标签</th>
+<th>可采用的一组手法，不是唯一公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纪录片式</td>
+<td>观察性机位、生活化表演、现场声、自然照明逻辑</td>
+</tr>
+<tr>
+<td>黑色电影参照</td>
+<td>强阴影、受限空间、道德困境、宿命性叙事</td>
+</tr>
+<tr>
+<td>生活流</td>
+<td>日常动作、较长停留、弱化戏剧强调、环境声</td>
+</tr>
+<tr>
+<td>梦境式</td>
+<td>时空跳跃、异常衔接、主观声音、非现实事件</td>
+</tr>
+<tr>
+<td>时尚影像</td>
+<td>造型与材质突出、身体表演、音乐组织段落</td>
+</tr>
+<tr>
+<td>商业广告</td>
+<td>产品可读、信息集中、受控灯光、明确节奏</td>
+</tr>
+<tr>
+<td>史诗感</td>
+<td>人与环境的尺度对比、群体调度、宏大叙事</td>
+</tr>
+<tr>
+<td>民间志怪</td>
+<td>日常生活与超常事件并置；可庄重、诙谐或悬疑</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-17">5. 怎样选出一套可执行风格</h2>
+<ol>
+<li><strong>先定观众体验。</strong> 写一句话说明主情绪、转折和信息揭示方式。</li>
+<li><strong>确定人物与场景的真实程度。</strong> 写实、简化、夸张分别会影响情感和动作表达。</li>
+<li><strong>选一种主导画面语言。</strong> 再给辅助技法明确职责，如“木刻线条负责轮廓，水彩负责色层”。不必机械限制数量，但要避免相互竞争。</li>
+<li><strong>固定色板与光影原则。</strong> 可以区分日夜场景，不要把全片锁成完全相同的曝光和颜色。</li>
+<li><strong>选动态基调。</strong> 先确定动作密度、运镜方式、剪辑节奏、旁白与声音关系。</li>
+<li><strong>测试代表性镜头。</strong> 至少覆盖人物近景、场景全景和一个关键动作，再决定是否扩大制作。</li>
+</ol>
+<p>测试时同时看美感和可动性：人物手部是否清楚，起始姿态是否方便完成动作，道具是否被遮挡，移动后需要补出的空间是否过多。</p>
+<h3 id="section-18">把模糊词转为可见要求</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>模糊词</th>
+<th>一种可执行的具体化示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电影感</td>
+<td>侧面中景、前景轻遮挡、窗侧柔光、空间有层次</td>
+</tr>
+<tr>
+<td>高级感</td>
+<td>限定色板、材质统一、主体清楚、装饰克制</td>
+</tr>
+<tr>
+<td>梦幻感</td>
+<td>扩散光、柔边缘、缓慢运动、主观声音</td>
+</tr>
+<tr>
+<td>紧张感</td>
+<td>受限构图、动作停顿、逼近的声音、延迟揭示</td>
+</tr>
+<tr>
+<td>古朴感</td>
+<td>明确的器物与服装参照、低光泽材质、克制配色</td>
+</tr>
+</tbody>
+</table></div>
+<p>上述示例不是这些感觉的唯一实现方法。</p>
+<h2 id="section-19">6. 三种生成路径，分别怎样写</h2>
+<h3 id="section-20">6.1 单图生视频</h3>
+<p><strong>生图输入：全片视觉规则＋角色／场景参考＋本镜头起始画面。</strong></p>
+<p><strong>视频输入：已确认的图片＋主要动作＋运镜＋结束状态＋必要的一致性要求。</strong></p>
+<p>图片已经提供的内容，无需逐项重复；但当关键材质或身份容易漂移时，可以简短强调。不要用与输入图竞争的大段新美术描述。</p>
+<p>示例：</p>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">延续输入图的二维淡彩水墨外观、人物服装和侧面光线。
+摄影机固定。女孩先停下阅读，随后轻轻抬头看向右侧窗外，
+最后保持凝望。双手留在书旁，窗上雨滴缓慢滑落。
+</code></pre></div>
+<h3 id="section-21">6.2 首尾帧视频</h3>
+<p><strong>首帧与尾帧共享身份、场景和视觉规则；分别说明起点与终点，再描述中间发生的动作。</strong></p>
+<p>尾帧优先通过首帧编辑或参考图约束生成。摄影机固定时，家具、背景与构图应相互匹配；摄影机移动时，两帧必须允许合理的透视与遮挡变化。</p>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">首帧：女孩低头看书，右手放在书旁。
+尾帧：女孩仍坐原位，双手未移动，头部转向右侧窗外。
+过渡：先抬起视线，再轻轻转头，最后停留。摄影机固定。
+</code></pre></div>
+<p>首尾帧约束的是端点，不能保证中间路径、动作次序或物体接触正确。洗脸、递物、换手等复杂动作宜拆分；跨场景变化通常采用多个镜头或明确的转场设计。</p>
+<h3 id="section-22">6.3 文生视频</h3>
+<p><strong>输入：全片视觉规则＋角色与场景＋起始构图＋动作过程＋运镜＋结束状态。</strong></p>
+<p>没有输入图提供视觉锚点，因此要写清关键外观。先描述一个连贯镜头；多镜头叙事留在分镜表中，或在支持相关控制的工具中明确组织。</p>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">二维水彩动画，细铅笔线条，灰蓝与米白色板，柔和窗光。
+黑色短发女孩穿米白开衫，坐在旧书店窗边，侧面中景，
+人物居左，右侧玻璃窗上有雨滴，打开的书放在面前。
+摄影机固定。女孩从低头阅读到轻轻转头看窗外，最后停留。
+</code></pre></div>
+<p>具体输入数量、首尾帧支持、时长、参考图、种子及声音功能，以实际工具界面或文档为准。本文不假设所有工具都有这些能力。</p>
+<h3 id="section-23">哪些内容应放在哪里</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>信息</th>
+<th>生图</th>
+<th>单镜头视频</th>
+<th>分镜／后期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>造型、材质、色板</td>
+<td>详细</td>
+<td>简短延续；文生视频需写清</td>
+<td>记录统一规则</td>
+</tr>
+<tr>
+<td>起始构图与姿态</td>
+<td>详细</td>
+<td>以图为起点或用文字写清</td>
+<td>检查前后衔接</td>
+</tr>
+<tr>
+<td>人物动作与运镜</td>
+<td>只准备适合动作的状态</td>
+<td>重点描述</td>
+<td>检查节奏</td>
+</tr>
+<tr>
+<td>尾帧</td>
+<td>按需生成</td>
+<td>用于终点约束</td>
+<td>检查下镜起点</td>
+</tr>
+<tr>
+<td>多镜头顺序与切点</td>
+<td>不用描述整段故事</td>
+<td>单镜头通常不承担</td>
+<td>重点描述</td>
+</tr>
+<tr>
+<td>旁白与音乐</td>
+<td>不用</td>
+<td>支持音频时按能力描述</td>
+<td>配音、剪辑、混音</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-24">7. 可直接复用的模板</h2>
+<h3 id="section-25">全片设定卡</h3>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">【创作方向】
+故事／题材：
+主要观看体验：
+情绪转折与信息揭示：
+
+【视觉规则】
+画面形式与真实程度：
+主导画面语言：
+辅助技法及作用范围：
+人物比例与五官规则：
+线条、表面材质与细节密度：
+主色、辅助色、强调色：
+日景与夜景的光影原则：
+时代、地域、建筑与器物参照：
+
+【资产】
+角色参考与固定特征：
+服装、配饰及允许变化：
+场景布局与关键道具：
+
+【全片视听】
+动作与表演基调：
+机位与运镜倾向：
+剪辑节奏：
+旁白、环境声与配乐关系：
+可变化项与必须保持项：
+</code></pre></div>
+<h3 id="section-26">单镜头卡</h3>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">镜头编号：
+本镜头传递的信息：
+生成方式：单图生视频／首尾帧／文生视频／后期处理
+使用的角色与场景参考：
+
+【起始画面】
+地点与时间：
+景别、机位、构图：
+人物姿态与视线：
+道具位置与接触关系：
+
+【动态】
+一个主要动作：
+动作先后与速度：
+摄影机运动：
+环境次要运动：
+结束状态／尾帧变化：
+需要保持的身份、材质与空间关系：
+
+【后期】
+旁白与声音：
+切入与切出位置：
+与相邻镜头的连续性：
+</code></pre></div>
+<p>模板是生产记录，不要求全部原样提交模型。每次按工具和生成路径抽取相关字段。</p>
+<h2 id="section-27">8. 实例：《张天师收服水鬼》</h2>
+<p>以下依据用户提供的故事梗概设计，不代表对其所引原书版本的独立核验。人物面貌、颜色和场景细节属于改编设定。</p>
+<h3 id="section-28">8.1 先确定故事体验</h3>
+<p><strong>普通家庭接纳了一个勤快孩子；洗脸让束缚解除，最后才揭晓其水鬼身份。</strong> 前段保留生活气息，关键异常短暂而明确。孩子不宜过早呈现典型怪物特征，否则结尾的信息揭示会减弱。</p>
+<p>故事顺序保留：首年春夜役鬼熄灯 → 次日答应赠徒 → 次年送来孩子并叮嘱不可洗脸 → 孩子帮工 → 妻子洗脸 → 道谢消失 → 天师说明身份。</p>
+<h3 id="section-29">8.2 全片风格卡</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>设定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画面形式</td>
+<td>二维民间志怪绘本外观</td>
+</tr>
+<tr>
+<td>主辅技法</td>
+<td>木刻感轮廓负责形体，淡彩水墨负责色层，轻微纸纹负责底材</td>
+</tr>
+<tr>
+<td>人物</td>
+<td>自然比例、简洁五官；张天师从容，举人夫妇生活化，孩子外观近似常人</td>
+</tr>
+<tr>
+<td>色板</td>
+<td>米黄、墨黑、灰青、木褐；朱红集中用于额头印记</td>
+</tr>
+<tr>
+<td>日夜光线</td>
+<td>白天柔和阴天光；夜晚局部暖黄油灯光，暗部仍保留可读轮廓</td>
+</tr>
+<tr>
+<td>场景</td>
+<td>南方旧宅、木窗、书案、天井、石板地；具体时代未明，避免标注为史实复原</td>
+</tr>
+<tr>
+<td>动态</td>
+<td>固定机位为主，关键细节少量推近，表演克制</td>
+</tr>
+<tr>
+<td>叙述</td>
+<td>第三人称旁白，画面呈现关键动作与反应</td>
+</tr>
+<tr>
+<td>声音</td>
+<td>雨滴、脚步、扫地、倒水、拧布声；揭晓前适当留白</td>
+</tr>
+</tbody>
+</table></div>
+<p>朱印样式需设计后固定。原梗概仅提到头上印记，未给出具体图案；将其设计在额头是便于叙事的改编选择。</p>
+<h3 id="section-30">8.3 共用生图描述</h3>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">二维中国民间志怪绘本插画，木刻感轮廓线勾勒人物和建筑，
+内部用淡彩水墨铺染，保留轻微旧宣纸纹理。人物比例自然，
+五官简洁，轮廓清楚。米黄、墨黑、灰青和木褐为主要颜色，
+朱红集中用于关键印记。南方旧宅的木质家具和石板地，
+材质朴素，整体安静古朴。光线按当前日夜场景设置。
+</code></pre></div>
+<p>在实际提示词中，将最后一句替换为本镜头具体的光源与亮暗关系；同时附上已确认角色和场景参考。</p>
+<h3 id="section-31">8.4 分镜与生成方式</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>镜头</th>
+<th>画面／信息</th>
+<th>动态与制作选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01 春夜借宿</td>
+<td>天师在灯下，举人在门外看见</td>
+<td>单图生视频；固定中景、灯火微动</td>
+</tr>
+<tr>
+<td>02 役鬼熄灯</td>
+<td>手指划动、暗处异样轮廓、灯灭</td>
+<td>拆成手势与灯火两个短镜头；可用亮灯／灭灯首尾帧</td>
+</tr>
+<tr>
+<td>03 次日询问</td>
+<td>举人惊疑，天师从容答应</td>
+<td>单图生视频；轻微表情，旁白承担对白信息</td>
+</tr>
+<tr>
+<td>04 次年赠童</td>
+<td>孩子在天师身侧，朱印可辨</td>
+<td>稳定中景；用旁白明确时间跳跃及不可洗脸的叮嘱</td>
+</tr>
+<tr>
+<td>05 日常帮工</td>
+<td>扫院、端茶、整理物件</td>
+<td>分别生成短镜头；每镜一个主要动作</td>
+</tr>
+<tr>
+<td>06 准备洗脸</td>
+<td>妻子看到脏脸，拿起湿布</td>
+<td>单图生视频；明确手、布、脸的相对位置</td>
+</tr>
+<tr>
+<td>07 印记消失</td>
+<td>湿布擦额头，朱印不再可见</td>
+<td>拆成接触与擦净结果；首尾帧可辅助，仍需检查中间动作</td>
+</tr>
+<tr>
+<td>08 道谢离去</td>
+<td>孩子道谢，随后原处空了</td>
+<td>孩子画面→妻子反应→空位，用后期剪辑完成</td>
+</tr>
+<tr>
+<td>09 真相揭晓</td>
+<td>天师出现并说明，夫妇惊惧</td>
+<td>旁白与反应镜头；最后短暂停留</td>
+</tr>
+</tbody>
+</table></div>
+<p>“鬼”不必一律化烟、发光或变形。消失可以由镜头连接表达，避免把叙事效果完全交给复杂生成特效。</p>
+<h3 id="section-32">8.5 洗脸镜头的首尾帧示范</h3>
+<div class="code-wrap"><button class="copy" type="button">复制提示词</button><pre><code class="language-text">【首帧】
+沿用角色与屋内场景参考。侧面近景，孩子站在左侧，妻子在右侧。
+孩子额头朱印清楚，妻子右手拿湿布，停在额头旁；左手自然垂下。
+两人身体与背景位置固定，日间柔光从左侧窗户照入。
+
+【尾帧】
+基于首帧编辑。保持同一人物、机位、背景和光线。
+湿布已离开额头，妻子右手略微下落，孩子额头干净，朱印消失。
+孩子仍然站在原位，准备抬眼。
+
+【过渡动态】
+摄影机固定。妻子用右手湿布轻轻擦过孩子额头，随后收回手。
+孩子身体不动。动作缓慢连贯，保持二维线条与水墨色层。
+
+【检查／替代】
+检查湿布是否真实接触额头、手指是否变形、朱印是否在擦拭后消失。
+若中间过程不自然，改用局部接触镜头与擦净结果镜头连接。
+</code></pre></div>
+<p>道谢和消失放在后续镜头，不把洗脸、印记消退、说话、消失同时压进一个生成片段。</p>
+<h2 id="section-33">9. 一致性检查与常见问题</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>具体看什么</th>
+<th>出问题优先怎么改</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美术</td>
+<td>线条、表面、色板、细节密度</td>
+<td>减少冲突描述，回到已确认样图</td>
+</tr>
+<tr>
+<td>身份</td>
+<td>脸型、发型、比例、服装和标志</td>
+<td>补充一致的角色参考，修正关键帧</td>
+</tr>
+<tr>
+<td>空间</td>
+<td>门窗、桌椅、杯子、左右方向</td>
+<td>对照场景布局，修正起始图或尾帧</td>
+</tr>
+<tr>
+<td>光线</td>
+<td>光源位置、日夜、色温</td>
+<td>明确当前场景光线和变化原因</td>
+</tr>
+<tr>
+<td>动作</td>
+<td>接触、重心、手部、动作次序</td>
+<td>减少同步动作，拆成可读的短镜头</td>
+</tr>
+<tr>
+<td>运镜</td>
+<td>人在动还是摄影机在动</td>
+<td>分别描述主体与摄影机，不只写“缓慢移动”</td>
+</tr>
+<tr>
+<td>连续性</td>
+<td>上镜结束与下镜开始是否接得上</td>
+<td>调整姿态、视线、道具状态或插入过渡镜头</td>
+</tr>
+<tr>
+<td>叙事</td>
+<td>是否提前泄露信息、遗漏关键因果</td>
+<td>调整镜头顺序和旁白</td>
+</tr>
+<tr>
+<td>声音</td>
+<td>是否抢旁白、是否与动作同步</td>
+<td>在后期调整进入时间、音量和留白</td>
+</tr>
+</tbody>
+</table></div>
+<p>重复风格词只能帮助约束，不能保证一致；“保持不变”也不是硬锁定。参考图、关键帧检查与后期修整需要共同使用。若工具提供种子或参考权重，可以记录用于复现和比较，但它们也不能单独保证跨镜头身份一致。</p>
+<p>先修影响叙事、身份和空间的错误，再优化小纹理。某个动作连续失败时，优先改变镜头拆法或使用剪辑表达，不必一味增加提示词长度。</p>
+<h2 id="section-34">10. 对原总结的评估与使用边界</h2>
+<p>原总结的优势是分类有条理，已提出全片视觉、单镜头画面、单镜头动态的分工，并包含三种生成路径。作为入门资料有用，作为直接执行的规范仍需补充约束和例子。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>原总结表述／做法</th>
+<th>问题</th>
+<th>本手册的处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“权威定义”</td>
+<td>未给出权威来源</td>
+<td>明确为实用创作框架</td>
+</tr>
+<tr>
+<td>“二者正交”</td>
+<td>忽略色彩、光线、构图等交集</td>
+<td>采用共享视觉规则与时间性视听扩展</td>
+</tr>
+<tr>
+<td>“各自都不混搭”</td>
+<td>过于绝对，也与后文可混合矛盾</td>
+<td>允许有主次、有范围的组合</td>
+</tr>
+<tr>
+<td>“画风＝三个维度”</td>
+<td>缺少造型、材质、色板等执行字段</td>
+<td>将分类词库与生产设定分开</td>
+</tr>
+<tr>
+<td>将不同层级并列</td>
+<td>媒介、用途、叙事载体混在一起</td>
+<td>标明类别交叉和用途边界</td>
+</tr>
+<tr>
+<td>skill 覆盖表直接打勾／判盲区</td>
+<td>当前仅阅读该总结，未核验所指 skill</td>
+<td>删除确定性覆盖结论；需要时另做文件级审查</td>
+</tr>
+<tr>
+<td>复制风格词“只能统一第 1 项”</td>
+<td>对结果承诺过强</td>
+<td>改为帮助约束，仍需参考与检查</td>
+</tr>
+<tr>
+<td>三种路径只有简短提纲</td>
+<td>缺少首尾状态、动作路径和后期职责</td>
+<td>补充输入分工、模板和完整案例</td>
+</tr>
+</tbody>
+</table></div>
+<p>原文提及的 CINEDANCE、Lira、ACTING 7 与 style-decider，在本次整理中未读取验证。因此不能据此判断它们具备或缺少哪些功能，也不把它们视为执行本手册的前提。</p>
+<p><strong>实际使用顺序：先填全片设定卡，确认角色与场景参考，再逐镜填写画面和动态，最后用一致性表验收。</strong></p>
+</article><footer>正文与同名 Markdown 一致。此页可离线阅读，无外部字体、脚本或图片依赖。</footer></main></div><script>
+document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{
+ const value=button.parentElement.querySelector('code').textContent;
+ let copied=false;
+ try{await navigator.clipboard.writeText(value);copied=true}catch(e){
+  const box=document.createElement('textarea');box.value=value;box.style.position='fixed';box.style.opacity='0';document.body.appendChild(box);box.select();
+  try{copied=document.execCommand('copy')}catch(e){}box.remove();
+ }
+ button.textContent=copied?'已复制':'请选中文字复制';setTimeout(()=>button.textContent='复制提示词',2200);
+}));
+document.getElementById('print').addEventListener('click',()=>window.print());
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}});
+},{rootMargin:'-5% 0px -70% 0px'});document.querySelectorAll('article h2').forEach(h=>observer.observe(h));}
+</script></body></html>

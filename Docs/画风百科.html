@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>影视与动漫画风百科</title>
+<style>
+  :root {
+    --bg: #0f0f12;
+    --panel: #18181f;
+    --panel-2: #1f1f28;
+    --border: #2a2a36;
+    --text: #e6e6ea;
+    --text-dim: #9a9aa8;
+    --accent: #d4a857;
+    --accent-2: #c34a4a;
+    --accent-3: #4a8fc3;
+    --accent-4: #6aa84f;
+    --accent-5: #8e6cb0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+  /* sidebar */
+  aside {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  aside h1 {
+    font-size: 16px;
+    margin: 0 0 4px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  aside .sub {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  aside nav a {
+    display: block;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: all 0.15s;
+  }
+  aside nav a:hover {
+    background: var(--panel-2);
+    color: var(--text);
+  }
+  aside nav .group {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-left: 12px;
+  }
+  /* main */
+  main {
+    padding: 40px 56px;
+    max-width: 1100px;
+  }
+  h2 {
+    font-size: 26px;
+    margin: 56px 0 20px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+  }
+  h2:first-of-type { margin-top: 0; }
+  h3 {
+    font-size: 18px;
+    margin: 28px 0 12px;
+    color: var(--text);
+  }
+  h4 {
+    font-size: 15px;
+    margin: 18px 0 8px;
+    color: var(--accent-3);
+  }
+  p {
+    margin: 8px 0;
+    color: var(--text);
+  }
+  strong { color: var(--accent); }
+  ul, ol {
+    padding-left: 24px;
+    color: var(--text);
+  }
+  li { margin: 4px 0; }
+  /* cards */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  /* color palette swatches */
+  .palette {
+    display: flex;
+    gap: 4px;
+    margin: 8px 0;
+    height: 24px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .swatch {
+    flex: 1;
+    height: 100%;
+    position: relative;
+  }
+  .swatch::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  }
+  /* table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--panel);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  td { background: var(--panel-2); }
+  code {
+    background: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #e0c084;
+  }
+  .quote {
+    background: var(--panel-2);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 12px 0;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .tag {
+    display: inline-block;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 11px;
+    color: var(--accent-3);
+    margin: 2px;
+  }
+  .tag.recommend {
+    border-color: var(--accent-4);
+    color: var(--accent-4);
+  }
+  .tag.avoid {
+    border-color: var(--accent-2);
+    color: var(--accent-2);
+  }
+  /* TOC */
+  .toc {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+  }
+  .toc h3 {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13px;
+  }
+  .toc a {
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <h1>画风百科</h1>
+    <div class="sub">AI 漫剧·短视频参考手册</div>
+    <nav>
+      <div class="group">导航</div>
+      <a href="#top">概览</a>
+      <a href="#one">影视画风</a>
+      <a href="#two">动漫画风</a>
+      <a href="#three">中国特色</a>
+      <a href="#four">实战速查</a>
+      <a href="#five">统一性铁律</a>
+      <a href="#six">003 项目建议</a>
+      <div class="group">资源</div>
+      <a href="画风百科.md">📄 下载 Markdown</a>
+    </nav>
+  </aside>
+  <main id="top">
+    <h2>影视与动漫画风百科</h2>
+    <p style="color: var(--text-dim);">用途：做 AI 漫剧/短视频时挑选统一画面风格（光影、色调、笔触、构图）的速查手册。</p>
+
+    <div class="quote">
+      <strong>核心原则</strong>：做视频，画面风格必须全片统一，<strong>禁止混搭</strong>——除非显式插入"风格段落标记"（如 MV、回忆、梦境、戏中戏），主叙事全程同一视觉系统。
+    </div>
+
+    <div class="toc">
+      <h3>目录</h3>
+      <ol>
+        <li><a href="#one">影视画风（真人实拍为主）</a></li>
+        <li><a href="#two">动漫画风（按地域学派）</a></li>
+        <li><a href="#three">中国特色画风（重点）</a></li>
+        <li><a href="#four">实战速查表（按题材挑）</a></li>
+        <li><a href="#five">视觉统一性铁律（做视频必读）</a></li>
+        <li><a href="#six">给你的 003 项目（张天师收服水鬼）选画风思路</a></li>
+      </ol>
+    </div>
+
+    <!-- ============================== -->
+    <h2 id="one">一、影视画风</h2>
+
+    <h3>A. 商业大片/电影级</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>cinematic 电影感通用底色</h4>
+        <p>浅景深、宽幅 anamorphic 镜头光晕、暖冷对比、低饱和。</p>
+        <span class="tag">通用兜底</span>
+      </div>
+      <div class="card">
+        <h4>诺兰/扎克施耐德写实质感</h4>
+        <p>冷青绿、暗部死黑、强剪影。</p>
+        <p style="color: var(--text-dim);">代表作：黑暗骑士、敦刻尔克、正义联盟</p>
+        <div class="palette">
+          <div class="swatch" data-label="深青" style="background:#1a3a3a;"></div>
+          <div class="swatch" data-label="钢蓝" style="background:#2a4a5a;"></div>
+          <div class="swatch" data-label="冷灰" style="background:#5a5a5a;"></div>
+          <div class="swatch" data-label="深黑" style="background:#0a0a0a;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>韦斯安德森对称构图</h4>
+        <p>高饱和糖果色、置景戏剧化、强迫症构图。</p>
+        <p style="color: var(--text-dim);">代表作：布达佩斯大饭店、月升王国</p>
+        <div class="palette">
+          <div class="swatch" data-label="粉" style="background:#f5b7c1;"></div>
+          <div class="swatch" data-label="薄荷" style="background:#a8e6cf;"></div>
+          <div class="swatch" data-label="芥黄" style="background:#f5d76e;"></div>
+          <div class="swatch" data-label="藕灰" style="background:#d6c6b8;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>雷德利斯科特史诗</h4>
+        <p>沙黄+铜绿+颗粒胶片。</p>
+        <p style="color: var(--text-dim);">代表作：角斗士、天国王朝</p>
+        <div class="palette">
+          <div class="swatch" data-label="沙黄" style="background:#c9a86a;"></div>
+          <div class="swatch" data-label="铜绿" style="background:#7a8a5a;"></div>
+          <div class="swatch" data-label="铁锈" style="background:#8a4a2a;"></div>
+          <div class="swatch" data-label="深褐" style="background:#3a2a1a;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>罗杰迪金斯自然光</h4>
+        <p>远景氤氲、近景锐利、阴影叙事。</p>
+        <p style="color: var(--text-dim);">代表作：边境杀手、银翼杀手 2049</p>
+      </div>
+      <div class="card">
+        <h4>库布里克凝视构图</h4>
+        <p>正中心对称、冰冷几何。</p>
+        <p style="color: var(--text-dim);">代表作：闪灵、发条橙</p>
+      </div>
+    </div>
+
+    <h3>B. 中国本土影视</h3>
+    <h4>第二/五/六代导演</h4>
+    <div class="card-grid">
+      <div class="card">
+        <h4>第五代浓色彩</h4>
+        <p>张艺谋 红高粱、大红灯笼；陈凯歌 黄土地、霸王别姬。</p>
+        <span class="tag">浓烈</span>
+        <div class="palette">
+          <div class="swatch" data-label="血红" style="background:#a02020;"></div>
+          <div class="swatch" data-label="黄土地" style="background:#c9a060;"></div>
+          <div class="swatch" data-label="朱红" style="background:#c43c3c;"></div>
+          <div class="swatch" data-label="灰墙" style="background:#7a7a7a;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>第六代写实</h4>
+        <p>贾樟柯 灰冷+绿调；毕赣 贵州雾林潮湿。</p>
+        <span class="tag">冷调</span>
+      </div>
+      <div class="card">
+        <h4>姜文式荒诞浓烈</h4>
+        <p>阳光灿烂的日子（暖橙金）、让子弹飞（西部片+民国）。</p>
+        <div class="palette">
+          <div class="swatch" data-label="暖橙" style="background:#e88a3a;"></div>
+          <div class="swatch" data-label="金黄" style="background:#e0b040;"></div>
+          <div class="swatch" data-label="砖红" style="background:#a05030;"></div>
+        </div>
+      </div>
+    </div>
+
+    <h4>港片黄金时代</h4>
+    <div class="card-grid">
+      <div class="card">
+        <h4>王家卫霓虹斑斓</h4>
+        <p>重庆森林、花样年华、一代宗师。</p>
+        <span class="tag">霓虹</span>
+        <div class="palette">
+          <div class="swatch" data-label="霓虹绿" style="background:#3aff7a;"></div>
+          <div class="swatch" data-label="品红" style="background:#ff3a8a;"></div>
+          <div class="swatch" data-label="橙黄" style="background:#ffa83a;"></div>
+          <div class="swatch" data-label="深紫" style="background:#3a2a5a;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>吴宇森白鸽慢镜</h4>
+        <p>英雄本色、喋血双雄。暴力美学+宗教意象。</p>
+      </div>
+      <div class="card">
+        <h4>杜琪峰银河映像</h4>
+        <p>枪火、暗战、暗花。高对比、强阴影、构图压抑。</p>
+      </div>
+      <div class="card">
+        <h4>徐克新派武侠</h4>
+        <p>黄飞鸿、青蛇、新龙门客栈。泼墨山水+动态强光。</p>
+      </div>
+      <div class="card">
+        <h4>李安东西融合</h4>
+        <p>卧虎藏龙（青绿写意）、色戒（民国旗袍）、少年派。</p>
+      </div>
+    </div>
+
+    <h4>武侠片三大流派</h4>
+    <div class="card-grid">
+      <div class="card">
+        <h4>胡金铨水墨留白</h4>
+        <p>侠女、空山灵雨。写意山水+京剧程式+空镜头。</p>
+      </div>
+      <div class="card">
+        <h4>张彻阳刚硬光</h4>
+        <p>邵氏黄+男性荷尔蒙。独臂刀。</p>
+      </div>
+      <div class="card">
+        <h4>楚原唯美布景</h4>
+        <p>三少爷的剑、流星蝴蝶剑。</p>
+      </div>
+    </div>
+
+    <h4>历史正剧 / 仙侠 / 民国</h4>
+    <div class="card">
+      <h4>历史正剧</h4>
+      <p>汉武大帝、大明王朝、康熙王朝、雍正王朝——黄铜+朱红+石青，沉稳庄重。</p>
+      <div class="palette">
+        <div class="swatch" data-label="黄铜" style="background:#b8923a;"></div>
+        <div class="swatch" data-label="朱红" style="background:#a03020;"></div>
+        <div class="swatch" data-label="石青" style="background:#3a5a7a;"></div>
+        <div class="swatch" data-label="暗金" style="background:#7a6020;"></div>
+      </div>
+    </div>
+
+    <div class="quote">
+      ⚠️ <strong>仙侠剧</strong>：早期影楼柔光（古剑奇谭、花千骨）vs 后期电影级（仙剑四、莲花楼、永安梦）差别巨大；现代项目必选电影级。
+    </div>
+
+    <div class="card">
+      <h4>民国/上海滩</h4>
+      <p>花样年华、长安十二时辰、隐秘而伟大、鬓边不是海棠红——旗袍+霓虹+茶色暖光。</p>
+    </div>
+
+    <div class="card">
+      <h4>赛博朋克中国风</h4>
+      <p>重庆依山魔幻（赛博朋克 2077 风格）、攻壳紫禁城概念图（朱红+赛博蓝紫）。</p>
+      <div class="palette">
+        <div class="swatch" data-label="朱红" style="background:#a02020;"></div>
+        <div class="swatch" data-label="赛博蓝" style="background:#3a4aff;"></div>
+        <div class="swatch" data-label="霓虹紫" style="background:#a83aff;"></div>
+        <div class="swatch" data-label="墨黑" style="background:#0a0a1a;"></div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <h2 id="two">二、动漫画风</h2>
+
+    <h3>A. 日漫</h3>
+    <div class="card-grid">
+      <div class="card"><h4>少年漫画</h4><p>热血、粗笔触、动线强。</p><p style="color:var(--text-dim);">海贼王、龙珠、猎人</p></div>
+      <div class="card"><h4>少女漫画</h4><p>唯美、闪粉、bling。</p><p style="color:var(--text-dim);">CLAMP、NANA</p></div>
+      <div class="card"><h4>赛璐璐</h4><p>早期 TV 平涂色块。</p><p style="color:var(--text-dim);">手冢治虫、蜡笔小新</p></div>
+      <div class="card"><h4>京阿尼</h4><p>京都精致光影+空气感。</p><p style="color:var(--text-dim);">凉宫春日、轻音少女</p></div>
+      <div class="card"><h4>吉卜力</h4><p>宫崎骏水彩温润；今敏写实心理。</p><p style="color:var(--text-dim);">千与千寻、千年女优</p></div>
+      <div class="card"><h4>新海诚</h4><p>极致光晕+照片级背景。</p><p style="color:var(--text-dim);">你的名字、天气之子</p><span class="tag recommend">推荐：青春题材</span></div>
+      <div class="card"><h4>汤浅政明</h4><p>变形夸张+实验性。</p><p style="color:var(--text-dim);">春宵苦短</p></div>
+      <div class="card"><h4>现代新派</h4><p>鬼灭之刃、咒术回战、JOJO。</p><p style="color:var(--text-dim);">时尚硬线</p></div>
+      <div class="card"><h4>硬核写实</h4><p>村田雄介一拳超人、井上雄彦灌篮高手真实分镜。</p></div>
+      <div class="card"><h4>藤本树电锯人</h4><p>粗粝分镜+情绪爆炸。</p></div>
+    </div>
+
+    <h3>B. 美漫</h3>
+    <div class="card-grid">
+      <div class="card"><h4>漫画书主流</h4><p>漫威/DC 鲜艳硬边、明暗强对比。</p></div>
+      <div class="card"><h4>成人动画</h4><p>Rick and Morty、Bojack Horseman。</p></div>
+      <div class="card"><h4>Cartoon Network</h4><p>Adventure Time、Gravity Falls。</p></div>
+      <div class="card"><h4>迪士尼 2D 经典</h4><p>白雪公主、小飞象（中世纪童话）。</p></div>
+      <div class="card"><h4>迪士尼/皮克斯 3D</h4><p>方脸大眼睛（玩具总动员）。</p></div>
+      <div class="card"><h4>梦工厂/蓝天</h4><p>史莱克、冰河时代（更卡通更圆）。</p></div>
+    </div>
+
+    <h3>C. 欧漫 / D. 韩漫</h3>
+    <div class="card-grid">
+      <div class="card"><h4>比利时漫画</h4><p>丁丁历险记（干净钢笔线）。</p></div>
+      <div class="card"><h4>法国诗意动画</h4><p>Princes et Princesses（水彩剪纸）。</p></div>
+      <div class="card"><h4>Persepolis</h4><p>伊朗黑白漫画电影。</p></div>
+      <div class="card"><h4>Naver Webtoon</h4><p>干净线条+渐变光。</p></div>
+      <div class="card"><h4>韩剧感古典</h4><p>柔光柔焦、瓷娃娃审美。</p></div>
+    </div>
+
+    <!-- ============================== -->
+    <h2 id="three">三、中国特色画风</h2>
+
+    <h3>A. 传统国画五大类</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>水墨写意</h4>
+        <p>齐白石、徐渭泼墨；留白、墨分五色（焦浓重淡清）。</p>
+        <p style="color:var(--text-dim);">适配：道家、隐士、山水</p>
+        <div class="palette">
+          <div class="swatch" data-label="焦墨" style="background:#1a1a1a;"></div>
+          <div class="swatch" data-label="浓墨" style="background:#3a3a3a;"></div>
+          <div class="swatch" data-label="重墨" style="background:#5a5a5a;"></div>
+          <div class="swatch" data-label="淡墨" style="background:#9a9a9a;"></div>
+          <div class="swatch" data-label="清墨" style="background:#d0d0d0;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>工笔重彩</h4>
+        <p>宋代院体、永乐宫壁画；线条精谨、金碧勾填。</p>
+        <p style="color:var(--text-dim);">适配：宫廷、仕女、神祇</p>
+      </div>
+      <div class="card">
+        <h4>青绿山水/金碧山水</h4>
+        <p>王希孟千里江山图；石青+石绿+泥金。</p>
+        <p style="color:var(--text-dim);">适配：仙山、仙境</p>
+        <div class="palette">
+          <div class="swatch" data-label="石青" style="background:#2a5a7a;"></div>
+          <div class="swatch" data-label="石绿" style="background:#3a7a5a;"></div>
+          <div class="swatch" data-label="泥金" style="background:#c9a040;"></div>
+          <div class="swatch" data-label="赭石" style="background:#8a5a3a;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>浅绛山水</h4>
+        <p>黄公望富春山居图；赭石为主+淡彩。</p>
+        <p style="color:var(--text-dim);">适配：文人山水、隐逸</p>
+      </div>
+      <div class="card">
+        <h4>白描/没骨</h4>
+        <p>连环画（小人书三国演义）、恽寿平没骨花卉。</p>
+      </div>
+    </div>
+
+    <h3>B. 古代壁画与石刻</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>敦煌壁画</h4>
+        <p>飞天、反弹琵琶、九色鹿；朱红+石青+佛青+描金。东方写意+宗教庄严。</p>
+        <div class="palette">
+          <div class="swatch" data-label="朱红" style="background:#a83a3a;"></div>
+          <div class="swatch" data-label="石青" style="background:#2a4a6a;"></div>
+          <div class="swatch" data-label="佛青" style="background:#3a6a8a;"></div>
+          <div class="swatch" data-label="描金" style="background:#c9a040;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>永乐宫壁画</h4>
+        <p>元代道教神仙；线条遒劲、色彩浓烈。</p>
+      </div>
+      <div class="card">
+        <h4>汉画像石/砖</h4>
+        <p>剪影感、平面化、汉代神话。</p>
+        <p style="color:var(--text-dim);">适配：汉代题材、祠堂</p>
+      </div>
+    </div>
+
+    <h3>C. 民间美术</h3>
+    <div class="card-grid">
+      <div class="card"><h4>年画</h4><p>杨柳青（工笔重彩）、桃花坞（江南雅致）、朱仙镇（粗犷木版）、绵竹（四川）。</p></div>
+      <div class="card"><h4>皮影戏</h4><p>陕西/唐山/陇西；镂空剪影+光影投射。</p></div>
+      <div class="card"><h4>剪纸</h4><p>陕北/河北；阴阳刻、图案化。</p></div>
+      <div class="card"><h4>刺绣/织锦</h4><p>苏绣湘绣、云锦蜀锦（图案化、几何对称）。</p></div>
+      <div class="card"><h4>蜡染/扎染</h4><p>贵州蓝白。</p></div>
+      <div class="card"><h4>泥塑/面塑</h4><p>无锡惠山泥人、浚县泥咕咕。</p></div>
+    </div>
+
+    <h3>D. 戏曲元素</h3>
+    <div class="card">
+      <h4>京剧脸谱 / 戏服程式 / 程式化表演</h4>
+      <p>红忠白奸黑直；强烈符号化。蟒靠帔褶，靠旗翎子。写意留白、虚拟动作。</p>
+    </div>
+
+    <h3>E. 影视衍生（新中式动画）</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>新中式动画电影</h4>
+        <p>哪吒之魔童降世、白蛇缘起、大鱼海棠、长安三万里、雄狮少年。</p>
+        <span class="tag recommend">★ 003 首选底色</span>
+      </div>
+      <div class="card">
+        <h4>国漫网络动画</h4>
+        <p>狐妖小红娘、一人之下（全性画风）、罗小黑战记（水墨清新）、全职高手。</p>
+      </div>
+      <div class="card">
+        <h4>老上美影中国学派</h4>
+        <p>大闹天宫（京剧脸谱）、哪吒闹海（工笔重彩）、天书奇谭（年画）、九色鹿（敦煌）、山水情（纯水墨巅峰）、小蝌蚪找妈妈（齐白石水墨）。</p>
+      </div>
+    </div>
+
+    <h3>F. 东方美学底层规律（可直接写进 prompt）</h3>
+    <ol>
+      <li><strong>留白</strong>——画面大量空，气在画外</li>
+      <li><strong>散点透视</strong>——长卷多点视线</li>
+      <li><strong>大气透视</strong>——远山朦胧，明度暗→亮、对比高→低、暖→冷、繁→简</li>
+      <li><strong>墨分五色</strong>——焦浓重淡清</li>
+      <li><strong>朱红+石青+石绿+泥金</strong>——皇家/仙凡配色公式</li>
+      <li><strong>虚实相生</strong>——雾、雨、雪、月作为情绪载体</li>
+    </ol>
+
+    <!-- ============================== -->
+    <h2 id="four">四、实战速查表</h2>
+    <table>
+      <thead>
+        <tr><th>题材调性</th><th>推荐风格</th><th>prompt 关键词</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>道家/隐士</td><td>水墨写意 + 浅绛山水</td><td>ink wash, xieyi, 留白, 墨分五色, 浅绛</td></tr>
+        <tr><td>仙境/仙山</td><td>青绿山水 + 金碧</td><td>blue-and-green landscape, gold outlines, 王希孟 palette</td></tr>
+        <tr><td>宫廷/仕女</td><td>工笔重彩 + 敦煌</td><td>gongbi, 永乐宫, 朱红石青, mineral pigments</td></tr>
+        <tr><td>道教斗法/符箓</td><td>敦煌壁画 + 新中式动画</td><td>Dunhuang mural, 飞天, 符箓发光, 哪吒之魔童降世 style</td></tr>
+        <tr><td>民俗/市井</td><td>年画 + 剪纸 + 白描</td><td>Yangliuqing New Year painting, 剪纸, 白描</td></tr>
+        <tr><td>武侠/动作</td><td>徐克新派 + 水墨</td><td>Tsui Hark wuxia, 泼墨, dynamic ink, 黄飞鸿</td></tr>
+        <tr><td>战阵剪影</td><td>皮影戏 + 汉画像石</td><td>Chinese shadow puppetry, 皮影剪影, 汉画像石</td></tr>
+        <tr><td>现代改编/民国</td><td>王家卫霓虹 + 港片</td><td>Wong Kar-wai neon, 花样年华, 重庆森林</td></tr>
+        <tr><td>赛博国风</td><td>赛博朋克+唐风</td><td>cyberpunk Hong Kong, neon temple, blade runner + 朱红</td></tr>
+        <tr><td>神话志怪</td><td>新中式电影动画</td><td>modern Chinese animation, cinematic donghua, 白蛇缘起</td></tr>
+        <tr><td>校园/青春</td><td>新海诚 + 京阿尼</td><td>Makoto Shinkai, Kyoto Animation, 极致光晕</td></tr>
+        <tr><td>热血战斗</td><td>少年漫画 + 鬼灭</td><td>shonen manga, 鬼灭之刃, 强动线</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ============================== -->
+    <h2 id="five">五、视觉统一性铁律</h2>
+    <ol>
+      <li><strong>一部作品只选一套主视觉系统</strong>，从片头到片尾贯穿。</li>
+      <li>唯一允许"换画风"的场景：MV 段落、回忆杀、梦境、戏曲嵌套、戏中戏——这些必须有显式转场标记。</li>
+      <li>同一部作品的 prompt 风格块（positive 关键词）必须严格复用，只允许在 <code>style_override</code> 列做单镜微调（光影、构图、镜头焦段）。</li>
+      <li>角色必须<strong>全片同一张脸/同一套服装/同一套装备</strong>——靠项目级 <code>characters.json</code> 锚定，不能每镜重新描述。</li>
+      <li>色彩取样：<strong>主色不超过 3 个 + 1 个强调色</strong>，整套画面围绕这 3+1 跑；不要每镜换调。</li>
+      <li>光源逻辑：<strong>全片光向一致</strong>（左前 45° 或顶光），不要有的镜次顶光有的顺光。</li>
+      <li>笔触/颗粒/纸张/胶片：选一种质感到底（水墨纸纹 OR 胶片颗粒 OR 数字锐利），不要混。</li>
+    </ol>
+
+    <!-- ============================== -->
+    <h2 id="six">六、003 项目选画风建议</h2>
+    <p><strong>题材核心</strong>：道教 + 民俗 + 斗法 + 民俗惊悚</p>
+
+    <table>
+      <thead>
+        <tr><th>候选</th><th>优点</th><th>风险</th><th>建议</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>新中式国漫电影</strong></td>
+          <td>模型训练样本多、出图稳定、人物造型清晰</td>
+          <td>易同质化（哪吒味）</td>
+          <td><span class="tag recommend">★ 首选</span></td>
+        </tr>
+        <tr>
+          <td>工笔重彩 + 敦煌</td>
+          <td>庄严感最强、符箓发光契合</td>
+          <td>生图模型对工笔线稿训练少，易糊</td>
+          <td>备选，需大量 negative 调校</td>
+        </tr>
+        <tr>
+          <td>纯水墨写意</td>
+          <td>东方意境最足</td>
+          <td>留白过多会稀释紧张感（S07/S11 已踩坑）</td>
+          <td><span class="tag avoid">× 已弃用</span></td>
+        </tr>
+        <tr>
+          <td>皮影戏</td>
+          <td>视觉钩子强、辨识度极高</td>
+          <td>不适合人物近景（看不清脸）</td>
+          <td>仅做战斗剪影穿插</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quote">
+      <strong>最终建议</strong>：003 主画风 = <strong>新中式国漫电影</strong>（哪吒/白蛇风），全片统一，不混搭。
+    </div>
+
+    <hr style="border-color: var(--border); margin: 40px 0;">
+    <p style="color: var(--text-dim); font-size: 12px;">
+      配套文件：<code>画风百科.md</code>（纯文本速查手册） · 本 HTML 浏览器版含配色板可视化<br>
+      路径：<code>C:\Users\xulinchao\.workbuddy\skills\ai-comic-director\Docs\</code>
+    </p>
+  </main>
+</div>
+</body>
+</html>

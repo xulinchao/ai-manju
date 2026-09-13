@@ -1,0 +1,44 @@
+{
+  "_why": [
+    "新建画风时复制本文件为 <id>.json（去掉下划线前缀才会被 styles.py 扫到）。",
+    "填之前先走完 _engine/画风决策.md 的三步：选形态 → 填九项形态卡 → 必要时做 Look Dev。",
+    "填完跑：python _engine/styles.py --show <id>  看自查是否通过。"
+  ],
+
+  "id": "your_style_id",
+  "name": "中文名",
+  "form": "所属制作形态",
+  "default_ratio": "16:9",
+  "describe": "一句话说清这套画风帮观众更快看懂什么、感到什么。不许写'高级''电影感'。",
+
+  "positive": "中文风格块。只管色彩层级·材质处理·阴影边缘·景深倾向·画面密度·笔触颗粒，绝不许写角色身份、场景地理、剧情状态。通过样图明确程度；数字比例不是模型精确执行的保证。",
+
+  "negative": "英文负向 bundle，写给 CLIP 的排除清单。注意：它只在有负向输入口的工作流上生效（当前 Qwen-Edit 有，Z-Image-Turbo 官方工作流没有）；没生效不会报错，dry-run 会提醒。",
+
+  "params": {},
+  "_params_hint": [
+    "键是工作流文件名，或 _all 表示所有工作流。",
+    "值的 key 支持两种写法：",
+    "  \"steps\": 8                 → 改所有含 steps 控件的节点（不需要知道节点 id）",
+    "  \"57:6:sampler_name\": \"euler\" → 只改节点 57:6 的 sampler_name（精确）",
+    "控件名从 gen_images.py --inspect 的输出里抄，不要凭记忆写。"
+  ],
+
+  "motion": {
+    "policy": "hold | minimal | beat_focused | full",
+    "allow": ["允许动的东西，写具体"],
+    "forbid": ["禁止动的东西，写具体"]
+  },
+
+  "continuity": {
+    "must": ["跨镜必须锚住的项"],
+    "skip": ["明确可以省掉的项"]
+  },
+
+  "lexicon": {
+    "prefer": ["这套画风下推荐用的词"],
+    "forbid": ["这套画风下会翻车的词"]
+  },
+
+  "notes": "这套画风踩过什么坑，写下来给下一次。"
+}

@@ -1,0 +1,26 @@
+{
+  "title": "本地图片一致性验证",
+  "slug": "consistency-lab",
+  "style_id": "picturebook_clean",
+  "image_pipeline_version": 2,
+  "candidate_limit": 3,
+  "review_style_asset": "LOOK",
+  "ratio": "16:9",
+  "width": 1024,
+  "height": 576,
+  "target_seconds": 48,
+  "form": "二维绘本",
+  "megapixels": 0.4,
+  "comfy_url": "http://127.0.0.1:8188",
+  "csv": "shots.csv",
+  "art_direction": {
+    "色板": "米白、灰蓝、木褐，铜色用于茶壶",
+    "光线": "白天，窗侧柔光；阴影保留可辨轮廓"
+  },
+  "workflows": {
+    "t2i": "t2i_z_image_turbo.json",
+    "edit": "edit_qwen_image_edit_2509.json",
+    "i2v": "minimax_h3_i2v.json",
+    "r2v": "minimax_h3_r2v.json"
+  }
+}

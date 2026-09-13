@@ -1,0 +1,67 @@
+{
+  "_comment": [
+    "工作流节点映射。键 = workflows/ 里的工作流 JSON 名称。",
+    "2026-09-12 实测填写；换工作流只需在这里加一条，不用改任何脚本代码。",
+    "注意：edit 的 433:110(负向) 排在 433:111(正向) 之前，自动猜测会猜反，必须显式写。",
+    "新增 edit_faceswap.json：基于 edit 工作流 + face_swap LoRA，input_face=定妆图，input_image=底图。"
+  ],
+  "t2i_z_image_turbo.json": {
+    "_engine_name": "Z-Image-Turbo 官方文生图（子图格式）",
+    "positive": "57:27",
+    "negative": "",
+    "seed": "57:3",
+    "save": "9",
+    "_size_node": "57:13",
+    "_params": "steps=8 cfg=1 sampler=res_multistep scheduler=simple shift=3"
+  },
+  "edit_qwen_image_edit_2509.json": {
+    "_engine_name": "Qwen-Image-Edit-2509 官方改图（含 Lightning-4 步 LoRA）",
+    "input_image": "78",
+    "positive": "433:111",
+    "negative": "433:110",
+    "seed": "433:3",
+    "save": "469",
+    "_params": "steps=4 cfg=1 sampler=euler；FluxKontextImageScale 自动缩放，不要手动设尺寸"
+  },
+  "edit_qwen_image_edit_2509_faceswap.json": {
+    "_engine_name": "Qwen-Image-Edit-2509 + face_swap LoRA（双图输入：image1=脸/定妆图，image2=身体/首帧图）",
+    "input_face": "901",
+    "input_image": "78",
+    "positive": "433:111",
+    "negative": "433:110",
+    "seed": "433:3",
+    "save": "469",
+    "_params": "BFS Face V1 约定：image1=脸 image2=身体；提示词 face swap face from Image 1 to Image 2. swap only the face and not the hair, the same skin tone from Image 2, same pose as Image 2；流程上 input_face 是 LoadImage face_ref.png，input_image 是首帧图"
+  },
+  "minimax_h3_i2v.json": {
+    "_engine_name": "MiniMax-H3 图生视频（仅首帧）",
+    "first_image": "114",
+    "prompt_text": "105:104",
+    "duration": "105:111"
+  },
+  "minimax_h3_r2v.json": {
+    "_engine_name": "MiniMax-H3 多参考图；两个图槽不等于首尾帧绑定",
+    "first_image": "137",
+    "last_image": "139",
+    "prompt_text": "138",
+    "duration": "132"
+  },
+  "edit_qwen_multi.json": {
+    "_engine_name": "Qwen-Image-Edit-2509 官方改图（含 Lightning-4 步 LoRA）",
+    "input_image": "78",
+    "positive": "433:111",
+    "negative": "433:110",
+    "seed": "433:3",
+    "save": "469",
+    "_params": "steps=4 cfg=1 sampler=euler；FluxKontextImageScale 自动缩放，不要手动设尺寸"
+  },
+  "edit_qwen_masked.json": {
+    "_engine_name": "Qwen-Image-Edit-2509 官方改图（含 Lightning-4 步 LoRA）",
+    "input_image": "78",
+    "positive": "433:111",
+    "negative": "433:110",
+    "seed": "433:3",
+    "save": "469",
+    "_params": "steps=4 cfg=1 sampler=euler；FluxKontextImageScale 自动缩放，不要手动设尺寸"
+  }
+}

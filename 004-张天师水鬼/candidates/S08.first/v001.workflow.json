@@ -1,0 +1,353 @@
+{
+  "78": {
+    "inputs": {
+      "image": "26ddd6b521640400.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "469": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "433:8",
+        0
+      ],
+      "filename_prefix": "tianshi-shuigui/S08.first/v001"
+    }
+  },
+  "433:75": {
+    "inputs": {
+      "strength": 1,
+      "pre_cfg": false,
+      "model": [
+        "433:66",
+        0
+      ]
+    },
+    "class_type": "CFGNorm",
+    "_meta": {
+      "title": "CFG归一化"
+    }
+  },
+  "433:39": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "433:38": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "433:37": {
+    "inputs": {
+      "unet_name": "qwen_image_edit_2509_fp8_e4m3fn.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "433:110": {
+    "inputs": {
+      "prompt": "photorealistic, photograph, 3d render, plastic, glossy, cel shading, flat vector, oversaturated, neon, pure black, flat lighting, pastel, heavy paper grain, fangs, glowing eyes, monstrous, scary monster face, demonic, horror gore, melting, smoke dissolve",
+      "clip": [
+        "433:38",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ],
+      "image1": [
+        "433:117",
+        0
+      ],
+      "image2": [
+        "ref2",
+        0
+      ],
+      "image3": [
+        "ref3",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "文本编码（QwenImageEditPlus）"
+    }
+  },
+  "433:66": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "433:440",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "采样算法（AuraFlow）"
+    }
+  },
+  "433:111": {
+    "inputs": {
+      "prompt": "Image 1 负责编辑底图。\nImage 2 负责身份与道袍。\nImage 3 负责身份与服装。\n色板：月白、黛青、赭石、墨黑；暖黄只出现在灯焰与受光面\n光线：每镜单一明确主光源；白天窗光，夜晚油灯\n白天，天光；木盆仍在原地\n编辑图像：在院落中加入揭底三人。\n【更改】：张天师立于院门口，微低着头叹气；举人与妻子僵立在水盆旁，妻子双手仍悬在半空。\n【精确保留】：院落地理、矮木盆位置、摄影机在天井南侧朝北的全景机位、白天天光。\n【唯一更改】：加入张天师与夫妻僵立姿态。\nPreserve this rendering style — 新中式动画电影画面，二维手绘上色带电影光感。每镜有单一明确主光源，光线方向统一，受光面亮、背光面沉入暗部，暗部为黛青色而非纯黑；人物与建筑以稳定墨线勾勒，内部淡彩水墨铺染，绢面质感细腻，纸纹只做底、不遮脸部和手部动作。整体色调取传统色：月白、黛青、赭石、墨黑，夜间场景点缀暖黄灯光，暖黄只出现在灯焰与受光面；留白与暗部承担画面呼吸，远景用淡墨色块分层而非细节堆叠；边缘光为冷青色。人物比例自然，五官简洁可辨，服装为古代中式布衣，家具陈设带传统民居的生活气息。画面有电影构图，主体清楚，明暗交界清晰，细节清楚可辨。笔触方向稳定一致",
+      "clip": [
+        "433:38",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ],
+      "image1": [
+        "433:117",
+        0
+      ],
+      "image2": [
+        "ref2",
+        0
+      ],
+      "image3": [
+        "ref3",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImageEditPlus",
+    "_meta": {
+      "title": "文本编码（QwenImageEditPlus）"
+    }
+  },
+  "433:88": {
+    "inputs": {
+      "pixels": [
+        "433:117",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE编码"
+    }
+  },
+  "433:8": {
+    "inputs": {
+      "samples": [
+        "433:3",
+        0
+      ],
+      "vae": [
+        "433:39",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "433:89": {
+    "inputs": {
+      "lora_name": "Qwen-Image-Edit-2509-Lightning-4steps-V1.0-bf16.safetensors",
+      "strength_model": 1,
+      "model": [
+        "433:37",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "433:117": {
+    "inputs": {
+      "image": [
+        "78",
+        0
+      ]
+    },
+    "class_type": "FluxKontextImageScale",
+    "_meta": {
+      "title": "图像缩放为FluxKontext"
+    }
+  },
+  "433:3": {
+    "inputs": {
+      "seed": 154837716366313,
+      "steps": [
+        "433:441",
+        0
+      ],
+      "cfg": [
+        "433:442",
+        0
+      ],
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "433:75",
+        0
+      ],
+      "positive": [
+        "433:111",
+        0
+      ],
+      "negative": [
+        "433:110",
+        0
+      ],
+      "latent_image": [
+        "433:88",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "433:436": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Stpes"
+    }
+  },
+  "433:437": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "433:438": {
+    "inputs": {
+      "value": 20
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Steps"
+    }
+  },
+  "433:439": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "CFG"
+    }
+  },
+  "433:440": {
+    "inputs": {
+      "switch": [
+        "433:443",
+        0
+      ],
+      "on_false": [
+        "433:37",
+        0
+      ],
+      "on_true": [
+        "433:89",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Switch (Model)"
+    }
+  },
+  "433:441": {
+    "inputs": {
+      "switch": [
+        "433:443",
+        0
+      ],
+      "on_false": [
+        "433:438",
+        0
+      ],
+      "on_true": [
+        "433:436",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Switch (Steps)"
+    }
+  },
+  "433:442": {
+    "inputs": {
+      "switch": [
+        "433:443",
+        0
+      ],
+      "on_false": [
+        "433:439",
+        0
+      ],
+      "on_true": [
+        "433:437",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "Switch (CFG)"
+    }
+  },
+  "433:443": {
+    "inputs": {
+      "value": true
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Enable Lightning LoRA"
+    }
+  },
+  "ref2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "c557cb4c7d342385.png"
+    },
+    "_meta": {
+      "title": "参考图 2"
+    }
+  },
+  "ref3": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "5853774ffa4ba1b5.png"
+    },
+    "_meta": {
+      "title": "参考图 3"
+    }
+  }
+}

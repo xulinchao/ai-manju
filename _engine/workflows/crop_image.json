@@ -1,0 +1,31 @@
+{
+  "source": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "source.png"
+    }
+  },
+  "crop": {
+    "class_type": "ImageCrop",
+    "inputs": {
+      "image": [
+        "source",
+        0
+      ],
+      "x": 0,
+      "y": 0,
+      "width": 256,
+      "height": 256
+    }
+  },
+  "save": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "crop",
+        0
+      ],
+      "filename_prefix": "crop"
+    }
+  }
+}

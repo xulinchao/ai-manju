@@ -1,0 +1,28 @@
+{
+  "_schema": "style-pack v1（字段说明见 _engine/styles.py）",
+  "id": "empty_scene",
+  "name": "新中式动画·空场景/道具设定图",
+  "form": "新中式动画电影",
+  "default_ratio": "16:9",
+  "describe": "空场景与道具设定图专用：画面主体只有建筑陈设或道具，negative 显式禁人物。",
+
+  "positive": "新中式动画电影场景设定图，二维手绘上色带电影光感。单一明确主光源，光线方向统一，受光面亮、背光面沉入暗部，暗部为黛青色而非纯黑；物象以稳定墨线勾勒，内部淡彩水墨铺染，绢面质感细腻。整体色调取传统色：月白、黛青、赭石、墨黑；留白与暗部承担画面呼吸。画面有电影构图，多用三分法构图，主体清楚，明暗交界清晰，细节清楚可辨。笔触方向稳定一致",
+
+  "negative": "photorealistic, photograph, 3d render, plastic, glossy, cel shading, flat vector, oversaturated, neon, pure black, flat lighting, pastel, heavy paper grain, person, people, human, figure, character, crowd, man, woman, child, fangs, glowing eyes, monstrous, scary monster face, demonic, horror gore, melting, smoke dissolve",
+
+  "params": {},
+
+  "motion": { "policy": "none", "allow": [], "forbid": [] },
+
+  "continuity": {
+    "must": ["主光方向与暗部色温", "建筑与陈设的方位"],
+    "skip": ["青苔的确切分布", "木纹细节", "背景色块的确切形状"]
+  },
+
+  "lexicon": {
+    "prefer": ["主光", "压暗", "淡彩水墨", "留白", "空寂", "画面中只有"],
+    "forbid": ["四溅", "光斑", "飞溅", "尖牙", "发光眼睛", "狰狞", "融化", "烟雾化", "纯黑"]
+  },
+
+  "notes": "2026-09-13 为 004 资产层新建。实测教训：主画风包 conditional 人物条款压不住 ROOM/PROP 的人物插入（「空寂」「画面中只有」连续两版失败，模型给书房配住户、给木盆配洗衣服的妻子）。空场景/道具走本快照：positive 全程不出现人物相关名词，negative 显式列 person/people/human/figure。只用于资产层设定图，分镜出图仍用主画风包 neo_chinese_cinematic（分镜要人物）。"
+}

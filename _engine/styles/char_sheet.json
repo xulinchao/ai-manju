@@ -1,0 +1,28 @@
+{
+  "_schema": "style-pack v1（字段说明见 _engine/styles.py）",
+  "id": "char_sheet",
+  "name": "新中式动画·角色设定图",
+  "form": "新中式动画电影",
+  "default_ratio": "16:9",
+  "describe": "角色设定图专用：素面背景，只有人物。主画风包的人物条款在这里是显式主语，环境偏置全部移除。",
+
+  "positive": "新中式动画电影人物全身立绘，二维手绘上色，淡彩水墨铺染，稳定墨线勾勒，绢面质感细腻。纯净的浅米色素面背景占满整个画面，背景素净平坦如空白宣纸，画面中只有人物与素色背景。人物全身可见居中站立，比例自然，五官清楚，细节清楚可辨。笔触方向稳定一致",
+
+  "negative": "photorealistic, photograph, 3d render, plastic, glossy, cel shading, flat vector, oversaturated, neon, pure black, flat lighting, pastel, heavy paper grain, interior, courtyard, building, window, lantern, furniture, background scene, color palette, color swatch, color chart, oil lamp, candle, flame, fangs, glowing eyes, monstrous, scary monster face, demonic, horror gore, melting, smoke dissolve",
+
+  "params": {},
+
+  "motion": { "policy": "none", "allow": [], "forbid": [] },
+
+  "continuity": {
+    "must": ["人物服装与年龄结构", "五官结构"],
+    "skip": ["背景（素色，无连续性要求）"]
+  },
+
+  "lexicon": {
+    "prefer": ["素面背景", "宣纸底色", "全身像", "五官清楚"],
+    "forbid": ["四溅", "光斑", "飞溅", "尖牙", "发光眼睛", "狰狞", "融化", "烟雾化", "纯黑"]
+  },
+
+  "notes": "2026-09-13 为 004 资产层新建。实测教训：主画风包即使把人物条款改成条件式「画面如出现人物」，CHAR 资产的「素面背景」仍被模型环境先验压过（3 版全配旧宅环境）。角色设定图走本快照：positive 主语就是「素色背景占满画面」，negative 显式禁环境元素。与主画风包同底色（墨线+淡彩水墨+绢面），设定图审核通过后与分镜出图风格仍同源。"
+}
